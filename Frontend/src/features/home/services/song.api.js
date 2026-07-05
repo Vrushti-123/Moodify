@@ -2,6 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
     // baseURL: "http://localhost:3000",        //this was before deployement
+    baseURL: "https://moodify-mklh.onrender.com", //this for checking UI while still developing
     withCredentials:true
 })
 

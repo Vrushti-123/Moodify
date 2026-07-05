@@ -18,12 +18,21 @@ export const useSong = () => {
 
         try {
             const data = await getSong({mood})
-            setSong(data.song)
+            const selectedSong = data.song
+            setSong(selectedSong)
 
             // isi mood ke hisaab se, humare khud ke uploaded saare songs
             // ki shuffled playlist bhi laa lete hai (right column ke liye)
             const listData = await getSongsByMood({mood})
-            setPlaylist(listData.songs)
+
+            // selectedSong pehle se hi listData.songs mein kahi bhi ho sakta hai,
+            // usse wahan se hata ke, sabse upar (index 0) pin kar dete hai
+            // taaki naye songs add hone par bhi user ko scroll karke
+            // dhoondhna na pade ki abhi konsa song chal raha hai
+            const remainingSongs = listData.songs.filter(
+                (item) => item._id !== selectedSong._id
+            )
+            setPlaylist([selectedSong, ...remainingSongs])
         } catch (err) {
             console.log(err)
         } finally {

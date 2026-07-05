@@ -6,7 +6,7 @@
     &__content {
         flex: 1;
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         align-items: flex-start;
         justify-content: center;
         gap: 2rem;
@@ -20,20 +20,25 @@
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
+        min-width: 0;
 
         &--left {
-            flex: 0 1 420px;
+            flex: 1 1 380px;
+            min-width: 320px;
             display: flex;
             align-items: center;
         }
 
         &--center {
-            flex: 1 1 480px;
+            flex: 1 1 420px;
+            min-width: 320px;
             max-width: 620px;
         }
 
         &--right {
-            flex: 0 1 380px;
+            flex: 1 1 340px;
+            min-width: 300px;
+            max-width: 380px;
             min-height: 0;
             overflow: hidden;
         }
@@ -43,6 +48,7 @@
 @media (max-width: 1080px) {
     .home-page__content {
         flex-direction: column;
+        flex-wrap: wrap;
         align-items: center;
     }
 
@@ -54,6 +60,7 @@
         &--center,
         &--right {
             flex: 1 1 auto;
+            min-width: 0;
         }
 
         &--right {

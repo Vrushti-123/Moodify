@@ -1,0 +1,73 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.75rem;
+    background: rgba(9, 10, 22, 0.75);
+    border-bottom: 1px solid rgba(147, 155, 255, 0.15);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    &__brand {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    &__icon {
+        color: var(--color-purple, #a78bfa);
+        filter: drop-shadow(0 0 6px rgba(167, 139, 250, 0.5));
+    }
+
+    &__title {
+        font-size: 1.3rem;
+        font-weight: 800;
+        letter-spacing: 0.01em;
+        background: linear-gradient(135deg, var(--color-purple, #a78bfa), var(--color-blue, #4fc3f7));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    &__user {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    &__username {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #eef0ff;
+    }
+
+    &__logout {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--color-blue-bright, #7dd8ff);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: var(--color-purple, #a78bfa);
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0.85rem 1.1rem;
+
+        &__title {
+            font-size: 1.1rem;
+        }
+    }
+}

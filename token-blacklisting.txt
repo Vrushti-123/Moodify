@@ -1,0 +1,29 @@
+token-blacklisting is used for logging out.
+
+so jab user log out ki request bhejta hai server ko,
+server: client side se user ka token clear kar deta hai.
+so that token gets deleted by the server.
+
+For valid logout:
+Now, let's say kisi aur user ne humara toke chura liya...
+so wo humara token use karke he can do wtv he wants to do by requesting the server.
+So, agar humne already logout kar liya hai, toh wo token blacklist mein add kar di jaati hai.
+so, agar koi aur user ne humara token chura liya hai toh wo server pe requestt karega then server check karega, 
+and agar wo token blacklisted hai, then wo dusre user ko 401: Unauthorized status code milega.
+
+So thats why token blacklisting is important
+Token-blacklisting is done using Redis. (not mongoDB)
+
+Agar token logout hone se pehle hi chori ho jaye, then also there's something called 
+"user-agent" to help in that scenario.
+Also, token ko chura easy nahi hota unless aapke paas woh device na aa jaye.
+
+
+-----------------------REDIS-------------------------------
+Why do we not use Redis as our primary database?
+Costly --> coz woh RAM use karta hai
+Query nahi kar sakte coz Redis stores data as key value pairs ( value type: String)
+
+host: vessel-mice-field-22723.db.redis.io
+port: 10191
+password: yWfAub3QdrenNRXppELRelKtsnDNmFi3

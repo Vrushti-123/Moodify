@@ -1,0 +1,156 @@
+1) Sabse pehle, ChatGPT (notes) --> code copy paste
+
+2) And copy paste karne se pehle ek accha sa folder structure banaya hai
+
+3) uske baad humne faceExpression.jsx mein jaake, detect function mein 
+    conditions badli so that code can detect face expressions in a better way.
+
+4) Now, faceExpression.jsx wali file is for UI layer, toh isme 
+    detect, init jese functions nahi hone chahiye... 
+    uska main kaam UI dikhane ka hai, logic ka nahi
+
+    So humne detect aur init functions ko utils.js mein daal diya.
+    unka ka kaam tha --> logic
+
+5) Ab utils.js mein: landmarkerRef and videoRef dono use toh ho raha hai
+    lekin usko humne banake rakha hai inside faceExpression.jsx 
+
+6) Also hume stream variable ka bhi kaam hai, so usko humne stream ke badle
+    useRef karka streamRef kar diya.
+
+7) then jo init, detect functions -> init(), detect() the, unme,
+    we added the required paramters jo wo use karenge inside the code using destructuring.
+    So ab ho jayega init({landmarkerRef, videoRef, streamRef}), detect({landmarkerRef, videoRef, streamRef}) :)
+
+8) Import both the function from util inside faceExpression.jsx
+    jab hum in functions ko useEffect mein use call kar rahe hai, we need to also send the parameters.
+
+    Also, jo humne button banaya hai, usme we are calling the detect function so, 
+    usme bhu we need to send the parameters.
+-------------------------------------------------------------------------------------------------
+
+9) create Backend folder, npm init -y
+    Download required packages: npm i mongoose express jsonwebtoken bcryptjs cookie-parser dotenv
+
+10) Then, regular folder structure:
+    --> Pehle app.js (inside src folder)
+    --> Then server.js (outside src)
+    --> Then src -> config -> database.js
+    --> connectToDB inside app.js
+    --> Then src -> models -> user.model.js
+    --> Then src -> routes -> user.routes.js
+    --> Use routes inside app.js (with prefixes)
+    --> For routes -> make controllers and middleware
+
+11) For logout, make another blacklist model
+    --> Also, identifyUser ka middleware, update it so that 
+        it checks for blacklisted tokens, if tokens are blacklisted,
+        then the user is not identified...
+
+12) Then went to redis, copied the host, port, and password
+13) Humare server and redis ko connect karne ke liye: npm i ioredis
+
+14) src -> config -> cache.js
+    Set up redis ka configurations
+
+15) then jo hum blacklist ke model se kar rahe the,
+    we'll replace that with redis (in auth.controller.js, auth.middleware.js)
+
+16) Redis insight, an application just like mongoDB Compass
+    just like how we use mongoDB Compass to view our stored values,
+    we can use Redis insight to view our data of blacklisted tokens.
+-------------------------------------------------------------------------------------------------
+
+17) Ab Frontend intergration:
+
+UI LAYER: UI dikhana + navigation handle karna (pages,components)
+HOOKS LAYER: State and APIs manage karna (hooks)
+STATE LAYER: data store karna and to make it available to all (auth.context.js)
+API LAYER: Backend se communicate karna. 
+    Create APIs that hit the ones created in the backend. (services/auth.api.js)
+
+        UI LAYER:
+    --> src -> features -> auth -> pages and components
+    --> pages -> Login.jsx and Register.jsx
+    --> npm i react-router-dom
+    --> src -> routes -> app.routes.js
+    --> createBrowserRouter ko create and export karenge.
+    --> Then require karenge app.js mein and then wrap karenge <App/> ko
+    --> npm i sass. Then, styling karenge and form banyenge.
+    --> src -> features -> shared -> global.scss
+    --> create login and register forms
+    --> auth -> pages -> styles -> login.scss, register.scss
+    --> Now, to reduce redundancy inside the forms of login and register, we make:
+        auth -> components -> FormGroup.jsx
+
+        API LAYER:
+    --> src -> features -> auth -> services -> auth.api.js
+    --> npm i axios. Then jitni APIs hai backend mein utne hi functions banayenge to hit those APIs
+
+        STATE LAYER:
+    --> src -> features -> auth -> auth.context.jsx
+    --> create and export context. Wrap App.jsx with <AuthProvider>
+
+        HOOKS LAYER:
+    --> src -> features -> auth -> hooks -> useAuth.js
+    --> import humari APIs ke functions
+    --> jo bhi cheeze hum AuthContext se values mein dete hai, useAuth mein wohi context se nikaalte hai.
+    --> create functions to handle login,logout,register etc. 
+    --> And then return required stuff inside { }.
+
+-------------------------------------------------------------------------------------------------
+
+18) npm i cors (in BACKEND!!)
+
+19) In Backend, create another model --> song.model.js
+    In routes -> song.routes.js
+    Then go to App.js and require the routes with prefixes
+    song.controller.js banayenge and use karenge in song.routes.js
+
+20) Now, we need to upload song/files, so we need to install multer
+21) Create a middleware --> upload.middleware.js
+22) A file has multiple things: the song url, the poster for the song,
+    the artist's name, album name, audio etc.
+    So yeh file ki itni saari cheeze cannot be directly read.
+    So, we need to install another package for reading this: 
+    npm i node-id3.
+    Isse, jo hum song ki file bhej rahe hai uski saari details can be read.
+
+23) require this node-id3 package inside song.controller.
+
+24) Also, hum song ki files bhejte hai imagekit par for storing.
+    So, we need to integrate imagekit in this project.
+
+    --> src -> services -> storage.services.js
+    --> GO to imagekit documentation -> install it first -> npm i @imagekit/nodejs
+    --> Get imagekit private key from imagekit ki website -> dashboard -> developer options -> private-key copy
+    --> Require the storage service inside song.controller
+    --> Postman se data bhejte waqt, we need to send key-value pairs for the song uplaod api:
+        postmane mein body ke andar -> form-data -> song: songfile, mood: happy 
+
+        Then, we mge a "GET API" to fetch songs as per the mood
+-------------------------------------------------------------------------------------------------
+
+25) Frontend integration :
+    --> Home Page banana hai. src -> features -> home -> pages + components
+    --> pages -> Home.jsx
+
+26) app.routes.js mein <Home/> set kar diya as the default route.
+    --> Now, we need to make it in such a way that jab bhi use detect expression ka
+        button click kare, as per the expression detected... it plays the required song
+        So, hume get song wali api hit karvani hai on clicking detect expression button.
+
+    --> Now, home wale folder ke liye again 4 layes banani padegi (ugghhhhhh!!!)
+
+27) home -> song.context.js
+    --> App.jsx ko wrap kardenge with songContextProvider
+
+28) home -> services -> song.api.js
+29) home -> hooks -> useSong.js
+30) home -> components -> Player.jsx (AI se banva di UI layer, and player.scss)
+    Isko add karenge (Player.jsx) inside Home.jsx
+
+31) Expression -> utils -> utils.js mein currentExpression return karvana hai
+32) faceExpression.jsx mein ek aur function banayenge for OnClick handling.
+33) Then Home.jsx mein jayenge, useSong hook ko call karenge. 
+    

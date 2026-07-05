@@ -1,0 +1,23 @@
+.home-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 108px;
+
+    &__content {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 2rem;
+        padding: 2.75rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .home-page__content {
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+    }
+}

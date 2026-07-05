@@ -1,0 +1,157 @@
+.expression-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.85rem;
+    width: 100%;
+    max-width: 420px;
+    padding: 2.25rem 2rem 2rem;
+    border-radius: 1.5rem;
+    text-align: center;
+    background: rgba(15, 17, 36, 0.55);
+    border: 1px solid var(--color-border, rgba(147, 155, 255, 0.22));
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow: 0 20px 60px rgba(5, 6, 20, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    animation: card-rise 0.55s ease both;
+
+    &__eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--color-blue-bright, #7dd8ff);
+    }
+
+    &__heading {
+        font-size: 1.55rem;
+        font-weight: 800;
+        letter-spacing: 0.01em;
+        color: #fff;
+        margin-bottom: 0.15rem;
+    }
+
+    &__frame {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        border-radius: 1rem;
+        overflow: hidden;
+        background: #050710;
+        border: 1px solid rgba(147, 155, 255, 0.25);
+        box-shadow: 0 0 0 1px rgba(79, 195, 247, 0.08) inset, 0 0 40px rgba(79, 195, 247, 0.12);
+    }
+
+    &__video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    &__corner {
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        pointer-events: none;
+        z-index: 2;
+        border-color: var(--color-teal, #2dd4bf);
+
+        &--tl {
+            top: 10px;
+            left: 10px;
+            border-top: 3px solid;
+            border-left: 3px solid;
+            border-radius: 6px 0 0 0;
+        }
+
+        &--tr {
+            top: 10px;
+            right: 10px;
+            border-top: 3px solid;
+            border-right: 3px solid;
+            border-radius: 0 6px 0 0;
+        }
+
+        &--bl {
+            bottom: 10px;
+            left: 10px;
+            border-bottom: 3px solid;
+            border-left: 3px solid;
+            border-radius: 0 0 0 6px;
+        }
+
+        &--br {
+            bottom: 10px;
+            right: 10px;
+            border-bottom: 3px solid;
+            border-right: 3px solid;
+            border-radius: 0 0 6px 0;
+        }
+    }
+
+    &__label {
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--color-text-dim, #8d93b8);
+        margin-top: 0.3rem;
+    }
+
+    &__mood {
+        font-size: 1.65rem;
+        font-weight: 800;
+        text-transform: capitalize;
+        min-height: 2rem;
+        background: linear-gradient(135deg, var(--color-teal, #2dd4bf), var(--color-blue-bright, #7dd8ff));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    &__btn {
+        margin-top: 0.4rem;
+        width: 100%;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding-block: 0.8rem;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        color: #06070f;
+        background: var(--gradient-primary, linear-gradient(135deg, #a78bfa 0%, #4fc3f7 100%));
+        box-shadow: 0 4px 20px rgba(79, 195, 247, 0.28);
+        transition: transform 0.2s ease, box-shadow 0.3s ease, filter 0.3s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.4);
+            filter: brightness(1.06);
+        }
+
+        &:active {
+            transform: translateY(0) scale(0.97);
+        }
+    }
+}
+
+@keyframes card-rise {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .expression-card {
+        padding: 1.75rem 1.25rem 1.5rem;
+    }
+}

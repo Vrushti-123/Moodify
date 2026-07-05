@@ -1,0 +1,79 @@
+:root {
+    --color-bg: #05060f;
+    --color-bg-alt: #0a0d1f;
+    --color-surface: rgba(255, 255, 255, 0.04);
+    --color-border: rgba(147, 155, 255, 0.22);
+    --color-blue: #4fc3f7;
+    --color-blue-bright: #7dd8ff;
+    --color-purple: #a78bfa;
+    --color-purple-deep: #8b6ef2;
+    --color-teal: #2dd4bf;
+    --color-text: #eef0ff;
+    --color-text-dim: #8d93b8;
+    --gradient-primary: linear-gradient(135deg, var(--color-purple) 0%, var(--color-blue) 100%);
+    --transition-base: 0.25s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    min-height: 100vh;
+}
+
+body {
+    background-color: var(--color-bg);
+    background-image:
+        radial-gradient(circle at 12% 18%, rgba(79, 195, 247, 0.16), transparent 42%),
+        radial-gradient(circle at 88% 82%, rgba(167, 139, 250, 0.18), transparent 46%),
+        linear-gradient(180deg, #05060f 0%, #0a0d1f 100%);
+    background-attachment: fixed;
+    color: var(--color-text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--color-blue-bright);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+a:hover {
+    color: var(--color-purple);
+}
+
+::selection {
+    background: var(--color-purple);
+    color: #fff;
+}
+
+/* subtle scrollbar to match the theme */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--color-blue), var(--color-purple));
+    border-radius: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

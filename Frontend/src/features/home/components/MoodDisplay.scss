@@ -1,8 +1,12 @@
 .mood-display {
     width: 100%;
-    max-width: 420px;
+    max-width: 620px;
     padding: 2rem 2rem 1.75rem;
     border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
     text-align: left;
     background: rgba(15, 17, 36, 0.55);
     border: 1px solid var(--color-border, rgba(147, 155, 255, 0.22));
@@ -10,6 +14,11 @@
     -webkit-backdrop-filter: blur(22px);
     box-shadow: 0 20px 60px rgba(5, 6, 20, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
     animation: mood-rise 0.6s ease both;
+
+    &__text {
+        flex: 1;
+        min-width: 0;
+    }
 
     &__eyebrow {
         text-transform: uppercase;
@@ -42,6 +51,23 @@
         border-radius: 6px;
         background: linear-gradient(90deg, var(--color-purple, #a78bfa), var(--color-blue, #4fc3f7));
     }
+
+    &__emoji-wrap {
+        flex: 0 0 auto;
+        width: 92px;
+        height: 92px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(147, 155, 255, 0.2);
+    }
+
+    &__emoji {
+        font-size: 3.4rem;
+        line-height: 1;
+    }
 }
 
 @keyframes mood-rise {
@@ -58,9 +84,19 @@
 @media (max-width: 480px) {
     .mood-display {
         padding: 1.5rem 1.5rem 1.35rem;
+        gap: 1rem;
     }
 
     .mood-display__value {
         font-size: 1.7rem;
+    }
+
+    .mood-display__emoji-wrap {
+        width: 68px;
+        height: 68px;
+    }
+
+    .mood-display__emoji {
+        font-size: 2.4rem;
     }
 }

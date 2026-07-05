@@ -9,9 +9,6 @@ import { SongContextProvider } from './features/home/song.context'
 
 const App = () => {
   return (
-    // <div>
-    //   {/* <FaceExpression/> */}
-    // </div>
 
     <AuthProvider>
       <SongContextProvider>

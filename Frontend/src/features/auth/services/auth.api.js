@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const api = axios.create({
-    // baseURL: "http://localhost:3000",         //this was for before deployment 
+    // baseURL: "http://localhost:3000",         //this was before deployement
     withCredentials:true
 })
 

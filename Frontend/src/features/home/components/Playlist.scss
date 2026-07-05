@@ -1,0 +1,177 @@
+.playlist {
+    width: 100%;
+    max-width: 380px;
+    min-width: 300px;
+    flex: 1 1 auto;
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.25rem;
+    background: rgba(15, 17, 36, 0.55);
+    border: 1px solid var(--color-border, rgba(147, 155, 255, 0.22));
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    box-shadow: 0 20px 60px rgba(5, 6, 20, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+    animation: playlist-rise 0.6s ease both;
+    overflow: hidden;
+
+    &__header {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1.5rem 1.5rem 1.1rem;
+        border-bottom: 1px solid rgba(147, 155, 255, 0.14);
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+        border-radius: 0.7rem;
+        color: #06070f;
+        background: var(--gradient-primary, linear-gradient(135deg, #a78bfa 0%, #4fc3f7 100%));
+        box-shadow: 0 4px 16px rgba(79, 195, 247, 0.3);
+    }
+
+    &__heading {
+        min-width: 0;
+    }
+
+    &__title {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 0.2rem;
+    }
+
+    &__subtitle {
+        font-size: 0.78rem;
+        color: var(--color-text-dim, #8d93b8);
+        text-transform: capitalize;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__list {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        padding: 0.6rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+
+    &__empty {
+        padding: 1.5rem 1rem;
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--color-text-dim, #8d93b8);
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        padding: 0.6rem 0.75rem;
+        border: none;
+        border-radius: 0.75rem;
+        background: transparent;
+        cursor: pointer;
+        text-align: left;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        &--active {
+            background: rgba(79, 195, 247, 0.12);
+            box-shadow: 0 0 0 1px rgba(79, 195, 247, 0.3) inset;
+
+            .playlist__song-title {
+                color: #7dd8ff;
+            }
+
+            .playlist__play-indicator {
+                color: #7dd8ff;
+            }
+        }
+    }
+
+    &__poster {
+        width: 42px;
+        height: 42px;
+        border-radius: 0.55rem;
+        object-fit: cover;
+        flex: 0 0 auto;
+        border: 1px solid rgba(147, 155, 255, 0.18);
+    }
+
+    &__meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        min-width: 0;
+        flex: 1;
+    }
+
+    &__song-title {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: #eef0ff;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__song-mood {
+        font-size: 0.7rem;
+        text-transform: capitalize;
+        color: var(--color-text-dim, #8d93b8);
+    }
+
+    &__play-indicator {
+        flex: 0 0 auto;
+        color: #6b7199;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &__list::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, var(--color-blue, #4fc3f7), var(--color-purple, #a78bfa));
+        border-radius: 8px;
+    }
+}
+
+@keyframes playlist-rise {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 1080px) {
+    .playlist {
+        max-width: 100%;
+        min-width: 0;
+        flex: 0 0 auto;
+        height: auto;
+        max-height: 520px;
+    }
+}

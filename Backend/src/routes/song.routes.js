@@ -8,4 +8,8 @@ songRouter.post("/", upload.single("song"), songController.uploadSong)
 
 //mood batane par, song ko return kar degi
 songRouter.get("/", songController.getSong )
+
+//mood batane par, us mood ke saare (shuffled) songs ki list return karegi
+songRouter.get("/list", songController.getSongsByMood )
+
 module.exports = songRouter

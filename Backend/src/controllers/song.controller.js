@@ -113,7 +113,37 @@ async function getSong(req, res){
     })
 }
 
+async function getSongsByMood(req, res){
+
+    const {mood} = req.query
+
+    if (!mood) {
+        return res.status(400).json({
+            message: "Mood is required"
+        });
+    }
+
+    // saare songs is mood ke liye laao, and shuffle karke bhejo
+    // (DB level par hi $sample use kar rahe hai taaki random order mile)
+    const songs = await songModel.aggregate([
+        {
+            $match: { mood }
+        },
+        {
+            $sample: { size: 1000 }
+        }
+    ]);
+    //size bohot bada de diya taaki practically saare match hone waale
+    //documents mil jaaye, bas shuffled order mein
+
+    res.status(200).json({
+        message: "Songs fetched successfully",
+        songs
+    })
+}
+
 module.exports = {
     uploadSong,
-    getSong
+    getSong,
+    getSongsByMood
 }

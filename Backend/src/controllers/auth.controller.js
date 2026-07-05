@@ -41,7 +41,7 @@ async function registerUser(req,res){
 
     res.cookie("token", token, {
         httpOnly: true,                                                         //JavaScript can't read the cookie (more secure).
-        secure: process.env.NODE_ENV === "production",                          //Cookies are only sent over HTTPS in production (Render uses HTTPS).
+        secure: process.env.NODE_ENV === "production",                          //Cookies are only sent over HTTPS in production (Render uses HTTPS)
         sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",       //allows cookies in production if needed; "lax" is convenient during local development.
         maxAge: 3 * 24 * 60 * 60 * 1000                                         //Keeps the user logged in for 3 days.
     });
@@ -113,6 +113,7 @@ async function getMe(req,res){
 async function logoutUser(req,res){
 
     const token = req.cookies.token
+
     res.clearCookie("token", {
         httpOnly: true,
         secure: process.env.NODE_ENV === "production",

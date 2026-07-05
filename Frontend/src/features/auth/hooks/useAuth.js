@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { getMe, login, logout, register } from "../services/auth.api";
 import { AuthContext } from "../auth.context";
+import { useSong } from "../../home/hooks/useSong";
 
 export const useAuth = () => {
     const context = useContext(AuthContext)
 
     const {User, setUser, loading, setloading} = context
+    const { resetSong } = useSong()
 
     async function handleRegister({username, email, password}){
         setloading(true)
@@ -13,6 +15,7 @@ export const useAuth = () => {
         try {
             const data = await register({ username, email, password });
             setUser(data.user);
+            resetSong() // naye account ke liye purane user ka song/playlist saaf kar do
         }
         //coz backend se "user" naam ka object bheja tha in response
         //so handleRegister humare register wale function (jo humne auth.api.js
@@ -31,6 +34,7 @@ export const useAuth = () => {
             try {
                 const data = await login({ username, email, password });
                 setUser(data.user);
+                resetSong() // naye user ke liye pichle wale ka song/playlist saaf kar do
             } catch (err) {
                 console.log(err);
                 throw err;
@@ -58,6 +62,7 @@ export const useAuth = () => {
         try {
             await logout();
             setUser(null);
+            resetSong() // agla jo bhi user login kare, use pichle wale ka data na dikhe
         } catch (err) {
             console.log(err);
             throw err;

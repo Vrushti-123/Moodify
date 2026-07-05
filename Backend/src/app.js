@@ -8,12 +8,12 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    // origin: "http://localhost:5173",          //this was for before deployment
-    origin: true,                                //this is for after deployment
+    origin: true,                              //this is after deployement
+    // origin: "http://localhost:5173",        //this was before deployement
     credentials: true
 }))
 
-//-----------------------------------------------------------------------
+//----------------------------------------------------
 const path = require("path")
 app.use(express.static('./public'))
 //jo bhi humare public folder mein hai, unko publically available bana deti hai
@@ -23,8 +23,9 @@ app.use(express.static('./public'))
 // (yahi se hi requested file ko response mein send kar deta hai)
 //  so yeh API ko aage jaane hi nahi deti
 // so humara wildcard use hi nahi hota. usko backend se pehle hi hum handle kar dete hai, with the help of this middleware
+//----------------------------------------------------
 
-//-------------------------------------------------------------
+
 
 connectToDB();
 
@@ -34,7 +35,8 @@ app.use("/api/auth", authRoutes)
 const songRoutes = require("./routes/song.routes")
 app.use("/api/song", songRoutes)
 
-//-------------------------------------------------------------------
+//----------------------------------------------------
+
 app.use("*name", (req,res)=>{
     // res.send("This is Wild Card")
     res.sendFile(path.join(__dirname, "..","/public/index.html"))
@@ -52,7 +54,7 @@ app.use("*name", (req,res)=>{
 //yeh un APIs ko handle karega jo humne create nahi ki hai.
 //agar galti se user ne esi API request kar di (postman mein URL mein) jo humne 
 // handle nahi ki hai --> toh ye usko handle karega
+//----------------------------------------------------
 
-//------------------------------------------------------------------------------
 
 module.exports = app
